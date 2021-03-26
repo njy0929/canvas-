@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: aquamarine;
+        }
+        .con {
+            border: 1px red solid;
+            box-sizing: border-box;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="con">
+
+        <canvas id="box" width="1000" height="500"></canvas>
+    </div>
+    <script src="./tool.js"></script>
+    <script>
+        window.onload = initCanvas();
+        var mCanvas; //声明Canvas对象;
+        var cxt; //声明context对象,该对象拥有丰富的绘图的API
+        function initCanvas() { //onload事件加载该方法，当HTML5页面加载的时候就会回调该方法
+            mCanvas = document.getElementById("box"); //初始化canvas对象,这里只是获得了Canvas的这个整个的标签---<canvas id="mCanvas" width="800" height="800"></canvas>
+            cxt = mCanvas.getContext("2d"); //初始化cxt对象,然后就去获得canvas的上下文对象cxt,注意传入参数为2d表示绘制2d平面，cxt得到的是一个canvasRenderingContext2D对象，里面封装了大量的canvas绘图API
+            //初始化Canvas
+            initMikyouCanvas(mCanvas, cxt);
+            /**canvas各种绘图的API**/
+            //1、绘制矩形，drawRect(x,y,width,height,isClear,isFill,bgColor);
+            // drawRect(100, 100, 200, 200, false, false, "rgba(0,0,255,0.8)");
+            // //2、绘制圆弧,drawArc(x,y,radius,startAngle,endAngle,anticlockwise,isOnlyArc,isFill);
+            // drawArc(200, 200, 100, 0, 90, false, true, false, "rgba(255,0,255,0.6)");
+            // //3、绘制圆形
+            // drawArc(420, 200, 100, 0, 360, false, false, true, "rgba(255,0,0,0.5)");
+            // //4、绘制扇形。drawSector(x, y, radius, startAngle, endAngle, anticlockwise, isFill, bgColor) 
+            // drawSector(350, 350, 100, 0, 120, false, true, "rgba(255,0,0,0.5)");
+            // //5、绘制线段 drawLine(startX, startY, endX, endY, lineWidth,bgColor)
+            // drawLine(300, 300, 400, 400, 1, "rgba(255,0,0,0.5)");
+            // drawLine(310, 350, 450, 450, 1, "rgba(0,0,255,0.5)");
+
+            // drawArc(100,100,50,0,360,false,false,false, 'blue')
+            // drawArc(100,100,51,0,360,false,false,false, 'red')
+            var speed = 5;
+
+            // demo();
+            
+            var timer = setInterval(demo, 1000);
+            function demo(){
+                drawArc(100,100,50,90-speed,90+speed,false,false,true, 'yellow');
+                speed += 5;
+                console.log(speed);
+                if(speed >= 180) {
+                    clearInterval(timer)
+                }
+            }
+            
+        }
+
+    </script>
+</body>
+
+</html>
